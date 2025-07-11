@@ -1,52 +1,8 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { useState, useEffect } from 'react'
 
 export default function Hero() {
-  const [currentCommand, setCurrentCommand] = useState('')
-  const [showCursor, setShowCursor] = useState(true)
-  const [isTyping, setIsTyping] = useState(false)
-
-  const commands = [
-    'whoami',
-    'cat about.txt', 
-    'ls skills/',
-    'grep -r "passion" .',
-    'find . -name "*.project"'
-  ]
-
-  const responses = [
-    'Praneesh RV - Cybersecurity Enthusiast & Developer',
-    'A passionate hacker who loves building secure applications and exploring the depths of technology.',
-    'penetration-testing  reverse-engineering  web-security  cryptography  malware-analysis',
-    './passion: Binary exploitation, CTF competitions, and breaking things to make them better.',
-    './projects/portfolioxblog  ./projects/ctf-writeups  ./projects/redteam-utils'
-  ]
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setShowCursor(prev => !prev)
-    }, 500)
-    return () => clearInterval(interval)
-  }, [])
-
-  const handleCommandClick = (index: number) => {
-    setIsTyping(true)
-    setCurrentCommand('')
-    
-    // Simulate typing animation
-    const command = commands[index]
-    let i = 0
-    const typeInterval = setInterval(() => {
-      setCurrentCommand(command.slice(0, i + 1))
-      i++
-      if (i >= command.length) {
-        clearInterval(typeInterval)
-        setIsTyping(false)
-      }
-    }, 50)
-  }
 
   return (
     <div className="min-h-screen relative overflow-hidden bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900">
@@ -166,66 +122,6 @@ export default function Hero() {
                 </div>
               </motion.div>
             </motion.div>
-
-            {/* Right Column - Enhanced Terminal */}
-            {/* <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="space-y-6"
-            >
-              <div className="terminal-window">
-                <div className="terminal-header">
-                  <div className="flex items-center space-x-2">
-                    <div className="w-4 h-4 rounded-full bg-red-500 terminal-button"></div>
-                    <div className="w-4 h-4 rounded-full bg-yellow-400 terminal-button"></div>
-                    <div className="w-4 h-4 rounded-full bg-green-500 terminal-button"></div>
-                  </div>
-                  <div className="text-cyan-300 text-sm font-mono glow-text">
-                    hack_the_planet.sh
-                  </div>
-                  <div className="w-16"></div>
-                </div>
-
-                <div className="terminal-content">
-                  <div className="prompt-line">
-                    <span className="text-magenta-400 glow-text">praneesh@portfolioxblog</span>
-                    <span className="text-cyan-300">:</span>
-                    <span className="text-blue-400">~</span>
-                    <span className="text-cyan-300">$ </span>
-                    <span className="text-yellow-300 glow-text">{currentCommand}</span>
-                    {showCursor && !isTyping && <span className="cursor">▋</span>}
-                    {isTyping && <span className="typing-cursor">▋</span>}
-                  </div>
-
-                  {currentCommand && !isTyping && (
-                    <motion.div
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      className="output-line"
-                    >
-                      {responses[commands.indexOf(currentCommand)]}
-                    </motion.div>
-                  )}
-
-                  <div className="space-y-2 pt-6">
-                    <div className="text-gray-400 text-sm font-mono">Available commands:</div>
-                    {commands.map((cmd, index) => (
-                      <motion.button
-                        key={cmd}
-                        onClick={() => handleCommandClick(index)}
-                        whileHover={{ x: 10, scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
-                        className="command-button"
-                      >
-                        <span className="text-cyan-300">$ </span>
-                        <span className="command-text">{cmd}</span>
-                      </motion.button>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </motion.div> */}
           </div>
         </div>
       </main>
